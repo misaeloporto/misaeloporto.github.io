@@ -3,7 +3,7 @@ body {
 }
 
 canvas {
-  background-color: lightgray;
+  background-image: url("images/b.png")
 }
 
 img {
