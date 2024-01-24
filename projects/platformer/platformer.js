@@ -49,7 +49,7 @@ $(function () {
     createPlatform(600,460,200, 5)
     createPlatform(500,460,100,5)
     createPlatform(100,360,200,5)
-
+    createPlatform(1010,400,200,10)
     
     // TODO 2
     // Create collectables
@@ -61,6 +61,7 @@ $(function () {
     createCollectable("star", 400, 54,20,0.5 )
     createCollectable("star",650,400,20,0.5)
     createCollectable("star",100,325,0,0,5)
+    createCollectable("star", 1050, 350, 0, 0,)
     // TODO 3
     // Create cannons
     // You must decide the wall you want the cannon on, the position on the wall, and the time between shots in milliseconds
@@ -70,7 +71,7 @@ $(function () {
     createCannon("left", 570,1050)
     createCannon("bottom", 600, 1000)
     createCannon("right", 325, 1000)
-
+    createCannon("top", 900, 1150)
 
     /////////////////////////////////////////////////
     //////////ONLY CHANGE ABOVE THIS POINT///////////
