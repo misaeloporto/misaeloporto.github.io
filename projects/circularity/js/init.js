@@ -35,7 +35,7 @@ var init = function (window) {
         
         for (var loopsCompleted = 0; loopsCompleted < 100; loopsCompleted++){
             drawCircle();
-        }
+        }//loop makes it so that there will be 100 circle drawn
         
 
         ////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ var init = function (window) {
            for(var i = 0; i < circles.length; i++){
             physikz.updatePosition(circles[i])
             game.checkCirclePosition(circles[i])
-           }
+           }//makes it so all circles move
             
         }
     
@@ -75,17 +75,18 @@ var init = function (window) {
             if ( circle.x > canvas.width ) {
                 circle.x = 0;
             }
+             // TODO 6 : YOUR CODE STARTS HERE //////////////////////
             if(circle.y > canvas.height){
                 circle.y = 0
             }
             if(circle.x < 0){
-                circle.x = canvas.width
+                circle.x = canvas.width // makes it so that  if circles go too far left it goes to the right side of the screen
             }
             if(circle.y < 0){
-                circle.y = canvas.height
+                circle.y = canvas.height// makes it so that if the circles go too far to the 
             }
             
-            // TODO 6 : YOUR CODE STARTS HERE //////////////////////
+           
             
 
 
