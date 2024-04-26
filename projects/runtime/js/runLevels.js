@@ -32,9 +32,7 @@ var runLevels = function (window) {
       obstacleImage.y = -25;
       sawBladeHitZone.rotationalVelocity = 10 // makes the sawblades rotate
    }
-   createSawBlade(400, groundY- 120, 10);
-   createSawBlade(700, groundY- 120, 20);
-   createSawBlade(900, groundY- 120, 30);
+  
 
   function createEnemy(x, y){
     var enemy = game.createGameItem("enemy", 25);
@@ -60,41 +58,54 @@ var runLevels = function (window) {
     //enemy.flyTo(0, 0)
     }
   }
-    createEnemy(600, groundY - 250);
-    createEnemy(800, groundY - 250);
+   
 
     function createReward(x, y){
-      var reward = game.createGameItem("enemy", 25);
-      var blueSquare = draw.rect(50, 50, "blue");
-      blueSquare.x = -25;//hitzone for the reward  on x position
-      blueSquare.y = -25;//hitzone for the reward on y position 
-      reward.addChild(blueSquare);// adds child red sqaure to reward
-      reward.x = x;// controls where the image appears on the x position 
-      reward.y = y;// controls where the image appears on the y position
-      game.addGameItem(reward);//adds enemy to the game
-      reward.velocityX = -3;// controls how fast the reward moves to hallebot
-      reward.rotationalVelocity = 0;// would make the enemy spin but it's set at zero so it doesn't spin
+      var reward = game.createGameItem("reward", 25);
+      var yellowSquare = draw.bitmap('img/mario star reward.png');
+      yellowSquare.x = -37;
+      yellowSquare.y = -40;
+      reward.addChild(yellowSquare);
+      reward.x = 1500;
+      reward.y = groundY - 80;
+      game.addGameItem(reward);
+      reward.velocityX = -3;
   
-      reward.onPlayerCollision = function (){
-      game.changeIntegrity(10);
-      game.increaseScore(50);
-      reward.flyTO(0, 0);
-    };
+      reward.onPlayerCollision = function () {
+        game.changeIntegrity(20)
+        game.increaseScore(50);
+        reward.shrink()
+      };
   
     reward.onProjectileCollision = function(){
-      game.increaseScore(100);
-      reward.fadeOut();
-      //reward.Shrink()
-      //reward.flyTo(x,y)
+
+
       }
     }
 
-    createReward(1000, groundY - 50);
+   
 
 
 
     function startLevel() {
       // TODO 13 goes below here
+      var level = levelData[currentLevel];
+      var levelObjects = level.gameItems;
+      for(var i = 0;i < levelObjects.length; i++){
+        var element = levelObjects[i];
+        if(element.type === 'sawblade'){
+          createSawBlade(element.x, element.y);
+        }
+        if(element.type === 'reward'){
+          createReward(element.x, element.y);
+        }
+        if(element.type === 'enemy'){
+          createEnemy(element.x, element.y);
+        }
+        if(element.type === 'marker'){
+          createMarker(element.x, element.y);
+        }
+      }
 
       //////////////////////////////////////////////
       // DO NOT EDIT CODE BELOW HERE
