@@ -37,18 +37,7 @@ function runProgram(){
   var walker2 = Walker("#walker2", BOARD_WIDTH-WALKER_WIDTH, BOARD_HEIGHT-WALKER_HEIGHT, 0, 0, WALKER_WIDTH, WALKER_HEIGHT)
   
 
-  function Walker(id, xPos, yPos, speedX, speedY, width, height){
-    let obj ={
-      id: id,
-      xPos: xPos,
-      yPos: yPos,
-      speedX: speedX,
-      speedY: speedY,
-      width:width,
-      height:height,
-    }
-    return obj
-  }
+  
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);
@@ -60,9 +49,12 @@ function runProgram(){
 
  
   function newFrame() {
-    repositionGameItem();
-    redrawGameItem();
-    wallCollision();
+    repositionGameItem(walker);
+    repositionGameItem(walker2);
+    redrawGameItem(walker);
+    redrawGameItem(walker2);
+    wallCollision(walker);
+    wallCollision(walker2);
     if(doCollide(walker, walker2)){
       collision(true);
     }else{
@@ -151,39 +143,29 @@ function runProgram(){
     
 }
   function collision(result){
-    if(result){
+    if(result === true){
       $("h1").text('tag your it ');
     }else{
       $("h1").text('No collision yet');
     }
   }
 
-  function repositionGameItem(){
-    walker.xPos += walker.speedX;
-    walker.yPos += walker.speedY;
-    walker2.xPos += walker2.speedX;
-    walker2.yPos += walker2.speedY;
+  function repositionGameItem(obj){
+    obj.xPos += obj.speedX;
+    obj.yPos += obj.speedY;
   }
   
-  function redrawGameItem(){
-    $("#walker").css("left", walker.xPos);
-    $("#walker").css("top", walker.yPos);
-    $("#walker2").css("left", walker2.xPos);
-    $("#walker2").css("top", walker2.yPos);
+  function redrawGameItem(obj){
+    $(obj.id).css("left", obj.xPos);
+    $(obj.id).css("top", obj.yPos);
   }
   
-  function wallCollision(){
-    if(walker.xPos > BOARD_WIDTH - WALKER_WIDTH||walker.xPos < 0){
-      walker.xPos -= walker.speedX
+  function wallCollision(obj){
+    if(obj.xPos > BOARD_WIDTH - WALKER_WIDTH||obj.xPos < 0){
+      obj.xPos -= obj.speedX
     }
-    if(walker.yPos > BOARD_HEIGHT- WALKER_HEIGHT||walker.yPos < 0){
-      walker.yPos -= walker.speedY
-    }
-    if(walker2.xPos > BOARD_WIDTH - WALKER_WIDTH||walker2.xPos < 0){
-      walker2.xPos -= walker2.speedX
-    }
-    if(walker2.yPos > BOARD_HEIGHT- WALKER_HEIGHT||walker2.yPos < 0){
-      walker2.yPos -= walker2.speedY
+    if(obj.yPos > BOARD_HEIGHT- WALKER_HEIGHT||obj.yPos < 0){
+      obj.yPos -= obj.speedY
     }
   }
   
@@ -195,6 +177,19 @@ function runProgram(){
     //switch the color 
     $("#walker").css("background-color", walker2Color)
     $("#walker2").css("background-color", walkerColor)
+  }
+
+  function Walker(id, xPos, yPos, speedX, speedY, width, height){
+    let obj ={
+      id: id,
+      xPos: xPos,
+      yPos: yPos,
+      speedX: speedX,
+      speedY: speedY,
+      width:width,
+      height:height,
+    }
+    return obj
   }
   function endGame() {
     // stop the interval timer
