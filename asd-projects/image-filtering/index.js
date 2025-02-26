@@ -79,7 +79,7 @@ function decreaseBlue(color){
   color[BLUE] = keepInBounds(color[BLUE] - 50)
 }
 
-function increasseGreenByBlue(color){
+function increaseGreenByBlue(color){
   color[GREEN] = keepInBounds(color[GREEN] + color[BLUE])
 }
 
