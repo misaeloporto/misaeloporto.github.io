@@ -12,7 +12,8 @@ function runProgram(){
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   const BOARD_WIDTH = $("#board").width()
   const BOARD_HEIGHT = $("#board").height()
-  
+  const BALL_WIDTH = $("#ball").width()
+  const BALL_HEIGHT = $("#ball").height()
   // Game Item Objects
 
   const KEY = {
@@ -58,8 +59,9 @@ function runProgram(){
     updateGameItem(paddleRight);
     drawGameItem(ball);
     updateGameItem(ball)
-    wallCollision();
-
+    wallCollision(paddleLeft);
+    wallCollision(paddleRight);
+    ballBounds(ball);
   }
   
   /* 
@@ -106,18 +108,35 @@ function runProgram(){
   }
 
   function wallCollision(obj){
-    
+    if(obj.y > BOARD_HEIGHT - obj.h||obj.y < 0 ){
+      obj.y -= obj.speedY
+    }
   }
 
   function hitBox(obj){
-
+    obj.leftX = obj.x;
+    obj.rightX = obj.x + obj.w;
+    obj.topY = obj.y;
+    obj.bottomY = obj.y + obj.h;
   }
-//ckeck boundries of paddles
-//handle what happens when the ball hits the wall
-// handle what happens when the ball hits the paddles 
-//handle what happens when someone wins
-// handle the points
-// handle resetting the game
+
+  function ballBounds(obj){
+    hitBox(obj)
+    if(obj.topY < 0 || obj.bottomY > BOARD_HEIGHT){
+      obj.speedY = -obj.speedY
+    }
+    if(obj.leftX < 0 ||obj.rightX > BOARD_WIDTH){
+      obj.speedX = -obj.speedX
+    }
+  }
+  function paddleCollision(ball, paddle1, paddle2){
+    hitBox(ball)
+    hitBox(paddle1)
+    hitBox(paddle2)
+    if(ball.leftX <= paddle1.rightX && ball){
+
+    }
+  }
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
