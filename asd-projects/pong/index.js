@@ -62,6 +62,7 @@ function runProgram(){
     wallCollision(paddleLeft);
     wallCollision(paddleRight);
     ballBounds(ball);
+    paddleCollision(ball, paddleLeft, paddleRight);
   }
   
   /* 
@@ -133,9 +134,20 @@ function runProgram(){
     hitBox(ball)
     hitBox(paddle1)
     hitBox(paddle2)
-    if(ball.leftX <= paddle1.rightX && ball){
-
+    if(ball.leftX < paddle1.rightX && ball.topY > paddle1.topY && ball.bottomY < paddle1.bottomY){
+      ball.speedX = -ball.speedX
     }
+    if(ball.rightX > paddle2.leftX && ball.topY > paddle2.topY && ball.bottomY < paddle2.bottomY){
+      ball.speedX = -ball.speedX
+    }
+  }
+
+  function ballWallCollision(){
+   
+  }
+
+  function increasePoints(){
+    
   }
   function endGame() {
     // stop the interval timer

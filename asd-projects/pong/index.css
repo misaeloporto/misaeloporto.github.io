@@ -1,6 +1,6 @@
 
 body {
-  background-color: rgba(38, 0, 100, 0.671);
+  background-color: rgba(91, 36, 180, 0.671);
 }
 
 #board {
@@ -22,16 +22,12 @@ body {
   background-color: rgb(34, 95, 136);
   left:10px;
   top:175px;
-/*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
-/*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
 }
 
 #paddleRight {
-  background-color: rgb(67, 19, 155);
+  background-color: rgb(95, 56, 167);
   left:870px;
   top:175px;
-/*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
-/*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
 }
 
 #ball{
